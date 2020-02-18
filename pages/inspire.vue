@@ -1,9 +1,8 @@
 <template>
   <v-layout>
     <v-flex class="text-center">
-      <Carousel />
       <blockquote class="blockquote">
-        &#8220;Add Smooothie Fruit&#8221;
+        <h1 class=".display-2">Add Smooothie Fruit</h1> 
         <footer>
           <v-layout align-center justify-center>
             <v-col cols="12" sm="6">
@@ -20,7 +19,7 @@
           </v-layout>
         </footer>
       </blockquote>
-      <SmoothieCard @addSmoothie="addSmoothie" />
+      <SmoothieCard :deleteFruit="deleteFruit" :fruits="fruits" />
     </v-flex>
   </v-layout>
 </template>
@@ -28,53 +27,38 @@
 <script>
 import { fireDb } from "../firebase.js";
 import { eventBus } from "@/eventBus";
-import SmoothieCard from "../components/SmoothieCard";
-import Carousel from "../components/carousel";
+import SmoothieCard from "@/components/SmoothieCard";
 
 export default {
+  name: "inspire",
   components: {
     SmoothieCard,
-    Carousel
   },
-  data() {
-    return {
-      title: "",
-      ingredient: "",
-      description: ""
-    };
+  data: () => ({
+    fruits: []
+  }),
+  beforeUpdate(){
+    console.log(this.fruits)
   },
   created() {
-    fireDb.collection("order").doc("order").get().then((snapshot) => {
-      snapshot.data()
-      console.log(snapshot.data())
-      console.log(data().document)
-    // console.log(
-    //     (
-    //       await fireDb
-    //         .collection("order")
-    //         .doc("order")
-    //         .get()
-    //     ).data()
-    //   );
-    
-});
-    eventBus.$on("order", snapshot => {
-      
-        this.title = data.title;
-        this.ingredient = data.ingredient;
-        this.description = data.description;
-        console.log(snapshot.data())
-      
-    });
+    this.loadData();
+    console.log(this.fruits);
   },
   methods: {
-    data() {
-      return {
-        writeSuccessful: false
-      };
+    loadData() {
+      fireDb
+        .collection("order")
+        .get()
+        .then(e => {
+          let fruitList = [];
+          e.docs.map(doc => {
+            fruitList.push(doc.data());
+          });
+          this.fruits = fruitList;
+        });
     },
     async saveSmoothie() {
-      const ref = fireDb.collection("order").doc("order");
+      const ref = fireDb.collection("order").doc(this.title);
       const document = {
         title: this.title,
         ingredient: this.ingredient,
@@ -86,21 +70,21 @@ export default {
         console.error(e);
       }
       this.writeSuccessful = true;
-      // eventBus.$emit("save-book", document);
-      // (this.title = ""),
-      //   (this.ingredient = ""),
-      //   (this.description = ""),
-    let addSmoothie = (await fireDb.collection("order").doc("order").get()).data()
+      this.loadData();
+    },
+    deleteFruit: function(titleFruit) {
+      fireDb
+        .collection("order")
+        .doc(titleFruit)
+        .delete()
+        .then(() => {
+          console.log("Deleted Completed");
+        })
+        .catch(err => {
+          console.error("Error message: ", err);
+        });
 
-      console.log("hhhhhhh",addSmoothie);
-      console.log(
-        (
-          await fireDb
-            .collection("order")
-            .doc("order")
-            .get()
-        ).data()
-      );
+      this.loadData();
     }
   }
 };
