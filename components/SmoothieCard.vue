@@ -3,7 +3,7 @@
     <v-col >
       <v-card class="mx-auto" max-width="400">
         <v-row align="center" justify="space-around" >
-          <v-card-title>{{addSmoothie.title}}</v-card-title>
+          <v-card-title>{{addSmoothie}}</v-card-title>
           <v-icon color="red">{{ icons.mdiDelete }}</v-icon>
         </v-row>
         <v-card-subtitle>{{bookAuthor}}dfsdfsdf</v-card-subtitle>

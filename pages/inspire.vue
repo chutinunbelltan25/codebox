@@ -36,11 +36,6 @@ export default {
     SmoothieCard,
     Carousel
   },
-<<<<<<< HEAD
-  name: "addSmoothie",
-=======
-  
->>>>>>> 9ffb7f0175e935e903e2ae3d589775db46194439
   data() {
     return {
       title: "",
@@ -97,15 +92,7 @@ export default {
       //   (this.description = ""),
     let addSmoothie = (await fireDb.collection("order").doc("order").get()).data()
 
-<<<<<<< HEAD
       console.log("hhhhhhh",addSmoothie);
-    
-=======
-      // console.log(document);
-      //   const ref = fireDb.collection("order").doc("order").get().then((snapshot) => {
-      // snapshot.data()
-      // console.log(snapshot.data())
->>>>>>> 9ffb7f0175e935e903e2ae3d589775db46194439
       console.log(
         (
           await fireDb
