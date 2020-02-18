@@ -1,0 +1,26 @@
+{
+  "name": "project-name",
+  "version": "1.0.0",
+  "description": "My dazzling Nuxt.js project",
+  "author": "chutinunbelltan25",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@mdi/js": "^4.9.95",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "firebase": "^7.8.2",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
