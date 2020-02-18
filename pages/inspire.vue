@@ -20,7 +20,7 @@
           </v-layout>
         </footer>
       </blockquote>
-      <SmoothieCard :data="snapshop" />
+      <SmoothieCard @addSmoothie="addSmoothie" />
     </v-flex>
   </v-layout>
 </template>
@@ -36,7 +36,7 @@ export default {
     SmoothieCard,
     Carousel
   },
-  name: "showCardSmoothie",
+  name: "addSmoothie",
   data() {
     return {
       title: "",
@@ -75,7 +75,6 @@ export default {
       try {
         let tmp = await ref.set(document);
       } catch (e) {
-        // TODO: error handling
         console.error(e);
       }
       this.writeSuccessful = true;
@@ -83,8 +82,10 @@ export default {
       // (this.title = ""),
       //   (this.ingredient = ""),
       //   (this.description = ""),
+    let addSmoothie = (await fireDb.collection("order").doc("order").get()).data()
 
-      console.log(document);
+      console.log("hhhhhhh",addSmoothie);
+    
       console.log(
         (
           await fireDb
