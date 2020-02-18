@@ -20,7 +20,7 @@
           </v-layout>
         </footer>
       </blockquote>
-      <SmoothieCard :data="snapshop" />
+      <SmoothieCard />
     </v-flex>
   </v-layout>
 </template>
@@ -36,7 +36,7 @@ export default {
     SmoothieCard,
     Carousel
   },
-  name: "showCardSmoothie",
+  
   data() {
     return {
       title: "",
@@ -46,9 +46,18 @@ export default {
   },
   created() {
     fireDb.collection("order").doc("order").get().then((snapshot) => {
-      this.showCardSmoothie = snapshot.data()
+      snapshot.data()
       console.log(snapshot.data())
       console.log(data().document)
+    // console.log(
+    //     (
+    //       await fireDb
+    //         .collection("order")
+    //         .doc("order")
+    //         .get()
+    //     ).data()
+    //   );
+    
 });
     eventBus.$on("order", snapshot => {
       
@@ -84,7 +93,10 @@ export default {
       //   (this.ingredient = ""),
       //   (this.description = ""),
 
-      console.log(document);
+      // console.log(document);
+      //   const ref = fireDb.collection("order").doc("order").get().then((snapshot) => {
+      // snapshot.data()
+      // console.log(snapshot.data())
       console.log(
         (
           await fireDb
