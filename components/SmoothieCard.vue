@@ -1,9 +1,9 @@
 <template>
   <v-row>
-    <v-col>
+    <v-col >
       <v-card class="mx-auto" max-width="400">
-        <v-row align="center" justify="space-around">
-          <v-card-title>{{addSmoothie}}jhlkhl</v-card-title>
+        <v-row align="center" justify="space-around" >
+          <v-card-title>{{addSmoothie.title}}</v-card-title>
           <v-icon color="red">{{ icons.mdiDelete }}</v-icon>
         </v-row>
         <v-card-subtitle>{{bookAuthor}}dfsdfsdf</v-card-subtitle>
@@ -44,9 +44,7 @@ import eventBus from "@/eventBus";
 import { mdiAccount, mdiPencil, mdiShareVariant, mdiDelete } from "@mdi/js";
 export default {
   props: {
-    addSmoothie: {
-      type: String
-    }
+    addSmoothies: Array
   },
   data: () => ({
     show: false,
